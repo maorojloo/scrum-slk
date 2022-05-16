@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
 from pathlib import Path
+import os
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -28,6 +30,17 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 
+#start of sqlalchemy configoration
+MIDDLEWARE_CLASSES = ('django.middleware.common.CommonMiddleware',)#?
+ROOT_PATH = os.path.dirname(__file__)#getting root path
+SQLALCHEMY_URL = 'sqlite:///' + os.path.join(BASE_DIR, 'db.sqlite3')#generatig sqlalchemy url
+
+
+#end of sqlalchemy configoration
+
+
+
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -37,6 +50,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'scrum_progect'
 ]
 
 MIDDLEWARE = [
@@ -54,7 +68,7 @@ ROOT_URLCONF = 'scrum_progect.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'],#ive got fuking problem with this line
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
